@@ -1,0 +1,591 @@
+{% style %}
+
+.title-wrapper-{{ section.id }} {
+	margin-bottom: 32px
+}
+
+.grid-{{ section.id }} {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 20px
+}
+
+  .section-{{ section.id }}-padding {
+    max-width: var(--max-width);
+    margin: var(--mt) auto var(--mb);
+    padding: 0 var(--px, 1.5rem);
+    padding-top: var(--pt);
+    padding-bottom: var(--pb);
+  }
+  .section-{{ section.id }} a {
+    text-decoration: none;
+  }
+  .section-{{ section.id }} * {
+    color: var(--color);
+    font-size: var(--mobile-font-size, calc(var(--font-size) * 0.85));
+    line-height: 1.2;
+    box-sizing: border-box;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding: 0 var(--px-desktop, 5rem);
+      padding-top: var(--pt-desktop);
+      padding-bottom: var(--pb-desktop);
+    }
+    .section-{{ section.id }} * {
+      font-size: var(--font-size);
+    }
+  }
+
+  .desktop-only-{{ section.id }} {
+    display: none;
+  }
+  @media screen and (min-width: 750px) {
+    .mobile-only-{{ section.id }} {
+      display: none;
+    }
+    .desktop-only-{{ section.id }} {
+      display: block;
+    }
+  }
+  .placeholder-{{ section.id }} {
+    background: rgb(26 26 26 / .3);
+    fill: rgb(26 26 26 / .7);
+    color: rgb(26 26 26 / .7);
+    display: block;
+  }
+  .rounded-{{ section.id }} {
+    border-radius: 12px;
+  }
+  .relative-{{ section.id }} {
+    position: relative;
+  }
+  .sr-only-{{ section.id }} {
+    width: 1px;
+    height: 1px;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border-width: 0;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    overflow: hidden;
+  }
+
+@media screen and (min-width:750px) {
+	.title-wrapper-{{ section.id }} {
+		margin-bottom: 48px
+	}
+
+	.grid-{{ section.id }} {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 0
+	}
+}
+
+.scroll-area-bleed-{{ section.id }} {
+	scrollbar-width: none;
+	position: relative;
+	scroll-snap-type: x mandatory;
+	overscroll-behavior-x: contain;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scroll-padding-inline: 20px;
+	margin-inline-start: -20px;
+	padding-inline-start: 20px;
+	display: grid
+}
+
+.scroll-area-bleed-{{ section.id }}::-webkit-scrollbar {
+	display: none
+}
+
+.scroll-area-bleed-{{ section.id }} .product-mobile-card-{{ section.id }} {
+	scroll-snap-align: start;
+	scroll-snap-stop: always;
+	width: 70vw;
+	flex-shrink: 0;
+	border-right: 1px solid rgb(26 26 26 / .12);
+	border-top: 1px solid rgb(26 26 26 / .12);
+	border-bottom: 1px solid rgb(26 26 26 / .12)
+}
+
+.button-on-image-{{ section.id }} {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	position: absolute;
+	transition: transform .2s ease-in-out;
+	transform-origin: center;
+	cursor: pointer
+}
+
+.button-on-image--active-{{ section.id }},
+.button-on-image-{{ section.id }}:hover {
+	transform: scale(1.3)
+}
+
+.button-on-image-{{ section.id }}::after {
+	content: "";
+	top: calc(50% + (24px * -1));
+	left: calc(50% + (24px * -1));
+	width: 48px;
+	height: 48px;
+	--shop-the-look-dot-background: 255 255 255;
+	background: radial-gradient(50% 50% at 50% 50%, rgb(var(--shop-the-look-dot-background) / 0), rgb(var(--shop-the-look-dot-background) / .3));
+	border-radius: 50%;
+	animation: 2s ease-in-out infinite alternate ping-custom;
+	position: absolute
+}
+
+@keyframes ping-custom {
+	from {
+		transform: scale(.8)
+	}
+
+	to {
+		transform: scale(1)
+	}
+}
+
+.product-mobile-card-wrapper-{{ section.id }} {
+	border: 1px solid
+}
+
+.product-mobile-card-wrapper-not-stacked-{{ section.id }} {
+	display: flex;
+	gap: 16px
+}
+
+.product-mobile-card-wrapper-not-stacked-{{ section.id }} .product-mobile-card-{{ section.id }} {
+	flex-grow: 1;
+	flex-shrink: 0
+}
+
+.product-mobile-card-{{ section.id }} {
+	padding: 16px;
+	gap: 16px;
+	display: flex;
+	align-items: center;
+	background: var(--mobile-product-card-bg);
+	color: var(--mobile-product-card-text-color)
+}
+
+.product-mobile-card-atc-{{ section.id }} {
+	border-radius: 60px;
+	width: fit-content;
+	background: var(--mobile-product-card-atc-bg, #e5e5e5);
+	color: var(--mobile-product-card-atc-text-color);
+	padding: 8px 20px;
+	margin-top: 6px
+}
+
+.product-card-{{ section.id }} {
+	position: relative;
+	display: grid;
+	align-content: start;
+	border-radius: 6px;
+	overflow: hidden;
+	grid-template-columns: minmax(0, 1fr);
+	width: 60%;
+	margin: 0 auto;
+	background: #fff;
+	opacity: 0;
+	transition: opacity .4s ease-in-out;
+	background: var(--product-card-bg);
+	color: var(--product-card-text-color)
+}
+
+.product-card-{{ section.id }}:not(:first-child) {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%)
+}
+
+.product-card--active-{{ section.id }} {
+	z-index: 1;
+	opacity: 1
+}
+
+.product-content-{{ section.id }} {
+	padding: 20px
+}
+
+.product-title-{{ section.id }} {
+	font-weight: 700;
+	text-decoration: none;
+	margin-bottom: 6px;
+	display: block;
+	--font-size: 16px
+}
+
+.price-{{ section.id }} {
+	--mobile-font-size: 12px
+}
+
+.product-image-{{ section.id }} {
+	object-fit: cover;
+	width: 100%;
+	height: 100%
+}
+
+.product-hover-image-{{ section.id }} {
+	transition: opacity .4s ease-in-out;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	background: var(--product-card-bg, #fff)
+}
+
+.product-image-wrapper-{{ section.id }}:hover .product-hover-image-{{ section.id }} {
+	opacity: 1
+}
+
+.more-detail-{{ section.id }} {
+	background: var(--product-card-atc-bg, #000);
+	border-radius: 60px;
+	position: absolute;
+	right: 16px;
+	bottom: 16px;
+	color: var(--product-card-atc-text-color, #fff);
+	padding: 12px 24px;
+	font-weight: 700;
+	font-size: 14px;
+	opacity: 0;
+	transform: translateY(5px);
+	transition: .2s ease-in-out
+}
+
+.product-image-wrapper-{{ section.id }}:hover .more-detail-{{ section.id }} {
+	opacity: 1;
+	transform: translateY(0)
+}
+
+.more-detail-{{ section.id }}:hover {
+	background: rgba(0, 0, 0, .85)
+}
+
+.product-save-amount-tag-{{ section.id }} {
+	position: absolute;
+	top: 16px;
+	left: 16px;
+	background: rgb(248 58 58);
+	--color: white;
+	color: #fff;
+	padding: 4px 8px;
+	border-radius: 60px;
+	font-size: 12px;
+	font-weight: 700;
+	z-index: 5;
+	pointer-events: none
+}
+
+.arrow-wrapper-{{ section.id }} {
+	display: flex;
+	justify-content: center;
+	gap: 16px
+}
+
+.arrow-{{ section.id }} {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	place-items: center;
+	transition: opacity .15s ease-in;
+	display: grid;
+	box-shadow: 0 0 0 1px rgb(var(--text-color) / .12);
+	cursor: pointer;
+	overflow: hidden
+}
+
+.animated-arrow-{{ section.id }} {
+	pointer-events: none;
+	place-items: center;
+	display: grid
+}
+
+.animated-arrow-{{ section.id }}:after,
+.animated-arrow-{{ section.id }}:before {
+	content: "";
+	grid-area: 1/-1;
+	transition: .2s ease-in-out;
+	border-style: solid;
+	border-width: 0;
+	--transform-logical-flip: 1
+}
+
+.animated-arrow-{{ section.id }}:before {
+	width: 8px;
+	height: 8px;
+	transform: rotate(calc(1 * 45deg));
+	border-color: currentColor;
+	border-block-start-width: 2px;
+	border-inline-end-width: 2px;
+	position: relative;
+	left: -1px
+}
+
+.animated-arrow-{{ section.id }}:after {
+	width: 10px;
+	height: 2px;
+	transform-origin: center;
+	opacity: 0;
+	background: currentColor;
+	transform: scaleX(.5)
+}
+
+.arrow-{{ section.id }}:hover .animated-arrow-{{ section.id }}:before {
+	transform: translate(calc(var(--transform-logical-flip) * 2px)) rotate(calc(var(--transform-logical-flip) * 45deg))
+}
+
+.arrow-{{ section.id }}:hover .animated-arrow-{{ section.id }}:after {
+	opacity: 1;
+	transform: scaleX(1)
+}
+
+{% endstyle %}
+
+<div class="section-{{ section.id }} section-{{ section.id }}-padding" style="
+      --max-width: 120rem;
+      --pt: 27px;
+      --pt-desktop: 36px;
+      --pb: 27px;
+      --pb-desktop: 36px;
+      --px: 1.5rem;
+      --px-desktop: 5rem;
+      --mt: 0px;
+      --mb: 0px;
+    ">
+	<div class="title-wrapper-{{ section.id }}">
+		<div class="title-{{ section.id }}" style="
+              font-weight: 700;
+              --font-size: 40px;
+              color: #000000;
+            ">{{ section.settings.title }}</div>
+	</div>
+	<div class="grid-{{ section.id }}">
+		<div>
+			<div class="relative-{{ section.id }}">
+	<img class="rounded-{{ section.id }}" style="width: 100%; object-fit: contain;" src="{{ section.settings.img | image_url:width:1000 }}" alt="{{ section.settings.img.alt | default:section.settings.title }}">
+      {% for block in section.blocks %}
+				<div class="button-on-image-{{ section.id }} button-on-image--active-{{ section.id }}" style="
+                background: white;
+                top: calc({{ block.settings.top }}% + (10px / 2));
+                left: calc({{ block.settings.left }}% + (10px / 2));
+              ">
+					<span class="sr-only-{{ section.id }}">Go to item {{ forloop.index }}</span>
+				</div>
+				{% endfor %}
+				
+			</div>
+		</div>
+		<div>
+			<div class="mobile-only-{{ section.id }}">
+				<div style="display: grid;">
+					<div class="scroll-area-bleed-{{ section.id }}">
+						<div style="display: flex; border-left: 1px solid rgb(26 26 26 / .12);">
+                           {% for block in section.blocks %}
+							<a class="product-mobile-card-{{ section.id }}" href="{{ block.settings.product.url }}">
+								<img style="width: 64px; height: 64px; object-fit: contain;" src="{{ block.settings.product.featured_media | image_url:width:700 }}" alt="{{ block.settings.product.featured_media.alt | default:block.settings.product.title }}">
+								<div>
+									<div class="product-title-{{ section.id }}">{{ block.settings.product.title }}</div>
+									<div class="price-{{ section.id }}">{{ block.settings.product.price | money }}</div>
+									<div class="product-mobile-card-atc-{{ section.id }}" style="--font-size: 14px">View product</div>
+								</div>
+							</a>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="desktop-only-{{ section.id }}" style="height: 100%;">
+				<div style="display: flex; justify-content: space-between; flex-direction: column; height: 100%; gap: 20px;">
+					<div class="relative-{{ section.id }}" style="height: 100%;">
+                           {% for block in section.blocks %}
+						<div class="product-card-{{ section.id }}{% if forloop.first %} product-card--active-{{ section.id }}{% endif %}">
+							<a class="relative-{{ section.id }} product-image-wrapper-{{ section.id }}" href="{{ block.settings.product.url }}">
+								<img class="product-image-{{ section.id }}" src="{{ block.settings.product.featured_media | image_url:width:700 }}" alt="{{ block.settings.product.featured_media.alt | default:block.settings.product.title }}">
+								<img class="product-image-{{ section.id }} product-hover-image-{{ section.id }}" src="{{ block.settings.product.media[1] | image_url:width:700 }}" alt="{{ block.settings.product.media[1].alt | default:block.settings.product.title }}" loading="lazy">
+								{% if block.settings.product.compare_at_price > block.settings.product.price  %}
+                              <div class="product-save-amount-tag-{{ section.id }}">{{ block.settings.product.compare_at_price|minus:block.settings.product.price | money }}</div>
+                              {% endif %}
+								<div class="more-detail-{{ section.id }}" style="--font-size: 14px">View product</div>
+							</a>
+							<div class="product-content-{{ section.id }}">
+								<a href="/products/foraker-canvas-coat" class="product-title-{{ section.id }}">{{ block.settings.product.title }}</a>
+								<div class="price-{{ section.id }}">
+                                  
+									<span {% if block.settings.product.compare_at_price > block.settings.product.price  %}style="
+                            
+                              color: red;
+                            
+                          "{% endif %}>{{ block.settings.product.price | money }}</span>
+                                  {% if block.settings.product.compare_at_price > block.settings.product.price  %}
+									<span style="
+                              text-decoration: line-through;
+                              color: rgba(26, 26, 26, 0.7);
+                            ">{{ block.settings.product.compare_at_price | money }}</span>
+                                    {% endif %}
+								</div>
+							</div>
+						</div>
+                             
+                             {% endfor %}
+						
+					</div>
+					<div class="arrow-wrapper-{{ section.id }}" style="--text-color: 26 26 26; color: black;">
+						<div class="arrow-{{ section.id }}" data-prev="">
+							<span class="sr-only-{{ section.id }}">Previous</span>
+							<span class="animated-arrow-{{ section.id }}" style="transform: rotate(180deg);"></span>
+						</div>
+						<div class="arrow-{{ section.id }}" data-next="">
+							<span class="sr-only-{{ section.id }}">Next</span>
+							<span class="animated-arrow-{{ section.id }}"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+          
+        <script>
+          (function () {
+            function sliderInit() {
+              let activeSlideIndex = 0;
+
+              const productCards = document.querySelectorAll(
+                '.product-card-{{ section.id }}'
+              );
+              const imageButtons = document.querySelectorAll(
+                '.button-on-image-{{ section.id }}'
+              );
+              function switchProduct(index) {
+                productCards.forEach((card, i) => {
+                  if (i === index) {
+                    card.classList.add('product-card--active-{{ section.id }}');
+                  } else {
+                    card.classList.remove(
+                      'product-card--active-{{ section.id }}'
+                    );
+                  }
+                });
+                imageButtons.forEach((button, i) => {
+                  if (i === index) {
+                    button.classList.add(
+                      'button-on-image--active-{{ section.id }}'
+                    );
+                  } else {
+                    button.classList.remove(
+                      'button-on-image--active-{{ section.id }}'
+                    );
+                  }
+                });
+                activeSlideIndex = index;
+
+                const scrollArea = document.querySelector(
+                  '.scroll-area-bleed-{{ section.id }}'
+                );
+                if (scrollArea) {
+                  const productCards = document.querySelectorAll(
+                    '.product-mobile-card-{{ section.id }}'
+                  );
+                  const productCard = productCards[activeSlideIndex];
+                  scrollArea.scrollTo({
+                    left: productCard.offsetLeft,
+                    behavior: 'smooth',
+                  });
+                }
+              }
+              imageButtons.forEach((button, i) => {
+                button.addEventListener('click', () => {
+                  switchProduct(i);
+                });
+              });
+              const prevArrow = document.querySelector(
+                '.arrow-{{ section.id }}[data-prev]'
+              );
+              const nextArrow = document.querySelector(
+                '.arrow-{{ section.id }}[data-next]'
+              );
+              prevArrow.addEventListener('click', () => {
+                if (activeSlideIndex === 0) {
+                  switchProduct(productCards.length - 1);
+                } else {
+                  switchProduct(activeSlideIndex - 1);
+                }
+              });
+              nextArrow.addEventListener('click', () => {
+                if (activeSlideIndex === productCards.length - 1) {
+                  switchProduct(0);
+                } else {
+                  switchProduct(activeSlideIndex + 1);
+                }
+              });
+            }
+            sliderInit();
+            if (window.Shopify && Shopify.designMode) {
+              document.addEventListener('shopify:section:load', sliderInit);
+            }
+          })();
+        </script>
+      </div>
+    </div>
+  </div>
+{% schema %}
+  {
+    "name": "Shop the look",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Section title",
+        "default":"Shop the look"
+      },
+      {
+          "type": "image_picker",
+          "id": "img",
+          "label": "Image"
+        }
+    ],
+    "blocks": [
+      {
+        "type": "product",
+        "name":"product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "range",
+            "id":"top",
+            "min": 1,
+            "max": 100,
+            "step": 1,
+            "default":40,
+            "unit": "%",
+            "label":"Distance from top"
+          },
+          {
+            "type": "range",
+            "id":"left",
+            "min": 1,
+            "max": 100,
+            "step": 1,
+            "default":40,
+            "unit": "%",
+            "label":"Distance from left"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Shop the look"
+      }
+    ]
+  }
+{% endschema %}
